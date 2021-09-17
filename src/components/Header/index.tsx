@@ -1,12 +1,17 @@
 import logo from '../../assets/logo.svg'
+
 import { Container, Content } from './styles'
 
-export function Header() {
+interface HeaderProps {
+    onOpenNewTaskModal: () => void;
+}
+
+export function Header({ onOpenNewTaskModal  }: HeaderProps) {
     return (
         <Container>
             <Content>
                 <img src={logo} alt="watask"/>
-                <button type="button">Nova atividade</button>
+                <button type="button" onClick={onOpenNewTaskModal}>Nova atividade</button>
             </Content>
         </Container>
     )
