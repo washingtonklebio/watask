@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { darken } from 'polished'
+import { darken, transparentize } from 'polished'
 
 export const Container = styled.form`
     h2 {
@@ -8,23 +8,24 @@ export const Container = styled.form`
         margin-bottom: 2rem;
     }
 
-    input, textarea {
+    input {
         width: 100%;
         padding: 0 1.5rem;
         height: 3rem;
         border-radius: 0.25rem;
-        border: 1px solid var(--green);
+        border: 0;
 
         &::placeholder {
             color: var(--text-body);
         }
+  
+        &.description-task {
+            height: 5rem;
+            padding: 0.5rem 1.5rem;
+            margin-top: 1rem;
+        }
     }
 
-    textarea {
-        height: 5rem;
-        padding: 0.5rem 1.5rem;
-        margin-top: 0.5rem;
-    }
 
     button[type="submit"] {
         width: 100%;
@@ -50,27 +51,34 @@ export const TaskTypeContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
-
-    button {
-        height: 3rem;
-        border: 1px solid var(--green);
-        border-radius: 0.25rem;
-        background: transparent;
+`
 
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+interface RadioBoxProps {
+    isActive: boolean;
+    activeColor: string;
+}
 
-        transition: border-color 0.2s;
+export const RadioBox = styled.button<RadioBoxProps>`
+    height: 3rem;
+    border: 0;
+    border-radius: 0.25rem;
+    background: ${({isActive, activeColor}) => isActive ? transparentize(0.7, activeColor) : '#FFFFFF'};
+    color: ${({isActive}) => isActive ? '#000' : '#969cb3'};
 
-        &:hover {
-            border-color: ${darken(0.1, '#00C063')};
-        }
 
-        span {
-            display: inline-block;
-            font-size: 0.9rem;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: ${darken(0.1, '#00C063')};
+    }
+
+    span {
+        display: inline-block;
+        font-size: 0.9rem;
     }
 `
