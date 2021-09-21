@@ -30,3 +30,14 @@ export const Content = styled.div`
         }
     }
 `
+
+export const ContentButtons = styled.div`
+    display: flex;
+    align-items: center;
+    
+    span {
+        margin-left: 1rem;
+        margin-top: 0.3rem;
+        cursor: pointer;
+    }
+`
