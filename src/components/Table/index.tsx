@@ -1,8 +1,17 @@
+import React, { useEffect, useContext } from 'react';
+
 import { Container } from './styles'
 
 import editIcon from '../../assets/edit.svg'
+import { TaskContext } from '../../contexts/TaskContext';
 
 export function Table() {
+    const { taskList, tasks,  editTag} = useContext(TaskContext);
+
+    useEffect(() => {
+        taskList();
+    }, []);
+
     return (
        <Container>
             <table>
@@ -17,39 +26,21 @@ export function Table() {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>Desenvolvimento de plataforma web</td>
-                        <td className="status todo"><span>Todo</span></td>
-                        <td>Washington</td>
-                        <td>16/09/2021</td>
-                        <td>
-                            <a href="#">
-                                <img src={editIcon} alt="Editar"/>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Desenvolvimento de plataforma web</td>
-                        <td className="status doing"><span>Doing</span></td>
-                        <td>Washington</td>
-                        <td>16/09/2021</td>
-                        <td>
-                            <a href="#">
-                                <img src={editIcon} alt="Editar"/>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Desenvolvimento de plataforma web</td>
-                        <td className="status done"><span>Done</span></td>
-                        <td>Washington</td>
-                        <td>16/09/2021</td>
-                        <td>
-                            <a href="#">
-                                <img src={editIcon} alt="Editar"/>
-                            </a>
-                        </td>
-                    </tr>
+                    {tasks.map(task => (
+                        <tr key={task.id}>
+                            <td>{task.name}</td>
+                            <td className={task.status}><span>{task.status}</span></td>
+                            <td>{ task.user.name }</td>
+                            <td>{new Intl.DateTimeFormat('pt-BR').format(
+                                new Date(task.estimate)
+                            )}</td>
+                            <td>
+                                <a href="#" onClick={() => editTag(task)}>
+                                    <img src={editIcon} alt="Editar"/>
+                                </a>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
        </Container>

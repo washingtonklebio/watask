@@ -33,17 +33,17 @@ export const Container = styled.main`
                 text-align: center;
            }
 
-           &.todo > span{
+           &.NOT_DONE > span{
                background: var(--status-todo);
                color: var(--orange);
            }
 
-           &.doing > span{
+           &.IN_PROGRESS > span{
                background: var(--status-doing);
                color: var(--blue);
            }
            
-           &.done > span{
+           &.DONE > span{
                background: var(--status-done);
                color: var(--green);
            }
